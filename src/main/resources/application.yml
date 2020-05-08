@@ -1,0 +1,121 @@
+application:
+  audit:
+    app-code: ${spring.application.name}
+    app-comment: COMENTARIOS ${spring.application.name}
+    app-name: ${spring.application.name}
+    enabled: false
+    jms-provider: IBM_MQ
+    queue-name: queueAuditoriaCorreos
+  cors:
+    enabled: true
+    mappings:
+    - allow-credentials: false
+      allowed-headers: Content-Type, Access-Control-Request-Headers,Access-Control-Request-Method, Accept, Origin, Authorization,X-Requested-With, Content-Disposition
+      allowed-methods: GET
+      allowed-origins: http://localhost,http://127.0.0.1
+      max-age: 3600
+      path: /api/user/1
+    - allow-credentials: false
+      allowed-headers: Content-Type, Access-Control-Request-Headers,Access-Control-Request-Method, Accept, Origin, Authorization,X-Requested-With, Content-Disposition
+      allowed-methods: GET
+      allowed-origins: '*'
+      max-age: 3600
+      path: /api/user/2
+    - allow-credentials: false
+      allowed-headers: Content-Type, Access-Control-Request-Headers,Access-Control-Request-Method, Accept, Origin, Authorization,X-Requested-With, Content-Disposition
+      allowed-methods: GET
+      allowed-origins: '*'
+      max-age: 3600
+      path: /api/user/**
+    - allow-credentials: false
+      allowed-headers: Content-Type, Access-Control-Request-Headers,Access-Control-Request-Method, Accept, Origin, Authorization,X-Requested-With, Content-Disposition
+      allowed-methods: POST, GET, PUT, OPTIONS, DELETE
+      allowed-origins: '*'
+      max-age: 3600
+      path: /**
+  uuaa: '@project.name@'
+  version: '@project.version@'
+es:
+  correos:
+    jwt-validation-enabled: false
+    public-key: |-
+      -----BEGIN PUBLIC KEY-----
+      MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgGzGPQ8Yzy11f2TaXMax
+      IMTea6kM+0fMBcCk2ZPUDGJ0Wo9/b4PZ5CFL+0Bd4gCWBymzwKR3yt3xhy0puDQd
+      1UAgkULmxDF7FkIUm+LWxYzjfeqcPQW8YZ00iTfiocUW2ylftWjEvftRtw2Y1Cox
+      btHOPZNql1BB7NObig9siyj0tF48hyS/GlvMc/wrGAbBWYTNA0lUazF++OWit3Fu
+      2m6yKFfOcudOOc3smZ3z+bhW17+YVPbo9Cfkct0oQKfwQ7NPmGoKShJRoi04/9dz
+      OD4voTuc5baF3yPjheDJOan9k9taOnb51Mh8sRIbVannkh1KzjuI/8WvE5qgpUlG
+      0wIDAQAB
+      -----END PUBLIC KEY-----
+    read:
+      replicas:
+        tracer:
+          enabled: false
+feign:
+  client:
+    custom:
+      default:
+        interceptors:
+          oauth2-interceptor-enabled: false
+ibm:
+  mq:
+    channel: DEV.ADMIN.SVRCONN
+    connName: localhost(1414)
+    password: passw0rd
+    queueManager: QM1
+    user: admin
+management:
+  endpoints:
+    web:
+      base-path: /
+server:
+  port: 9080
+  servlet:
+    context-path: /arquetipo
+spring:
+  application:
+    name: '@project.name@'
+  data:
+    web:
+      pageable:
+        default-page-size: 20
+        max-page-size: 100
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    initialization-mode: always
+    password: 123456
+    url: jdbc:postgresql://localhost:5432/ventas
+    username: postgres
+  entitymanager:
+    packages-to-scan: es.correos.arq.correo_orden_ms.domain, es.correos.arq.correo_orden_ms.repository
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+        temp:
+          use_jdbc_metadata_defaults: false
+    show-sql: true
+  read:
+    datasource:
+      driver-class-name: org.postgresql.Driver
+      initialization-mode: always
+      password: 123456
+      url: jdbc:postgresql://localhost:5432/ventas
+      username: postgres
+    entitymanager:
+      packages-to-scan: ${spring.entitymanager.packages-to-scan}
+    jpa:
+      database-platform: org.hibernate.dialect.PostgreSQLDialect
+      hibernate:
+        ddl-auto: validate
+      properties:
+        hibernate:
+          format_sql: true
+          temp:
+            use_jdbc_metadata_defaults: false
+racer.enabled=false:
