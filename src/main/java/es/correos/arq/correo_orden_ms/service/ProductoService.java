@@ -1,17 +1,17 @@
 package es.correos.arq.correo_orden_ms.service;
 
 import java.util.List;
-import es.correos.arq.correo_orden_ms.dto.ProductoDTO;
+import es.correos.arq.correo_orden_ms.domain.Producto;
 
 public interface ProductoService {
 	
-	ProductoDTO buscarProductoPorId(int id);
+	Producto buscarProductoPorId(int id);
 
-	void guardarProducto(ProductoDTO producto);
+	void guardarProducto(Producto producto);
 
-	List<ProductoDTO> listarProducto();
+	List<Producto> listarProducto();
 
-	void actualizarProducto(ProductoDTO producto);
+	void actualizarProducto(Producto producto);
 
 	void eliminarProducto(int id);
 	

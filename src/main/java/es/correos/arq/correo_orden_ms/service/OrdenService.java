@@ -1,17 +1,17 @@
 package es.correos.arq.correo_orden_ms.service;
 
 import java.util.List;
-import es.correos.arq.correo_orden_ms.dto.OrdenDTO;
+import es.correos.arq.correo_orden_ms.domain.Orden;
 
 public interface OrdenService {
 	
-	void guardarOrden(OrdenDTO orden);
+	void guardarOrden(Orden orden);
 
-	List<OrdenDTO> listarOrdenes();
+	List<Orden> listarOrdenes();
 
-	void actualizarOrden(OrdenDTO orden);
+	void actualizarOrden(Orden orden);
 
 	void eliminarOrden(int id);
 	
-	OrdenDTO buscarOrdenPorId(int id);
+	Orden buscarOrdenPorId(int id);
 }

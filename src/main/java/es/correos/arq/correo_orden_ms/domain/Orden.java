@@ -1,9 +1,14 @@
 package es.correos.arq.correo_orden_ms.domain;
 
 import java.sql.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +25,7 @@ public class Orden {
 
 	@Id
 	@Column(name = "ordenid")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int ordenid;
 
 	@Column(name = "empleadoid")
@@ -33,5 +39,8 @@ public class Orden {
 
 	@Column(name = "descuento")
 	private int descuento;
+	
+	@OneToMany(mappedBy = "orden", cascade = CascadeType.ALL)
+	private List<DetalleOrden> detalleOrden;
 	
 }

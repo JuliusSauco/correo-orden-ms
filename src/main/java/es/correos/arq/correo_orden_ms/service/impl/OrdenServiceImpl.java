@@ -4,8 +4,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import es.correos.arq.correo_orden_ms.domain.Orden;
-import es.correos.arq.correo_orden_ms.dto.OrdenDTO;
-import es.correos.arq.correo_orden_ms.mapper.OrdenMapper;
 import es.correos.arq.correo_orden_ms.repository.OrdenRepository;
 import es.correos.arq.correo_orden_ms.service.OrdenService;
 
@@ -15,21 +13,19 @@ public class OrdenServiceImpl implements OrdenService {
 	@Autowired
 	private OrdenRepository ordenRepository;
 
-	private OrdenMapper ordenMapper;
-
 	@Override
-	public void guardarOrden(OrdenDTO orden) {
-		ordenRepository.saveAndFlush(ordenMapper.ordenDTOToOrden(orden));
+	public void guardarOrden(Orden orden) {
+		ordenRepository.saveAndFlush(orden);
 	}
 
 	@Override
-	public List<OrdenDTO> listarOrdenes() {
-		return ordenMapper.ordenToOrdenDTO(ordenRepository.findAll());
+	public List<Orden> listarOrdenes() {
+		return ordenRepository.findAll();
 	}
 
 	@Override
-	public void actualizarOrden(OrdenDTO orden) {
-		ordenRepository.saveAndFlush(ordenMapper.ordenDTOToOrden(orden));
+	public void actualizarOrden(Orden orden) {
+		ordenRepository.saveAndFlush(orden);
 	}
 
 	@Override
@@ -39,8 +35,8 @@ public class OrdenServiceImpl implements OrdenService {
 	}
 
 	@Override
-	public OrdenDTO buscarOrdenPorId(int id) {
-		return ordenMapper.ordenToOrdenDTO(ordenRepository.findByOrdenid(id));
+	public Orden buscarOrdenPorId(int id) {
+		return ordenRepository.findByOrdenid(id);
 	}
 
 }
